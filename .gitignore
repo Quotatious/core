@@ -25,3 +25,5 @@ config/secrets.yml
 
 # phpstorm crap
 /.idea
+
+config/mongoid.yml
