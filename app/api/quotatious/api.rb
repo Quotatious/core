@@ -15,7 +15,11 @@ module Quotatious
       end
       route_param :id do
         get do
+          begin
           Quote.find(params[:id])
+          rescue Mongoid::Errors::DocumentNotFound => e
+            error!({error: :DocumentNotFound}, 500)
+          end
         end
       end
 
@@ -41,11 +45,15 @@ module Quotatious
         requires :categories, type: Array, desc: "Categories."
       end
       put ':id' do
+        begin
         Quote.find(params[:id]).update({
                                            text: params[:text],
                                            answers: params[:answers],
                                            categories: params[:categories],
                                        })
+        rescue Mongoid::Errors::DocumentNotFound => e
+          error!({error: :DocumentNotFound}, 500)
+        end
       end
 
       desc "Delete a Quote."
@@ -56,11 +64,8 @@ module Quotatious
         begin
           Quote.find(params[:id]).destroy
           {success: 'true'}
-        rescue Exception => e
-          {
-              success: 'false',
-              error: e.as_json
-          }
+        rescue Mongoid::Errors::DocumentNotFound => e
+          error!({error: :DocumentNotFound}, 500)
         end
       end
     end
