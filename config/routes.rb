@@ -54,5 +54,5 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  mount Quotalitious::API => '/api'
+  mount Quotatious::API => '/api'
 end

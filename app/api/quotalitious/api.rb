@@ -1,6 +1,6 @@
-module Quotalitious
+module Quotatious
   class API < Grape::API
-    version 'v1', using: :header, vendor: 'quotalitious'
+    version 'v1', using: :header, vendor: 'quotatious'
     format :json
 
     resource :quotes do
@@ -22,31 +22,29 @@ module Quotalitious
       desc "Create a quote."
       params do
         requires :text, type: String, desc: "The quote."
-        requires :answer, type: String, desc: "The anwser."
-        requires :tags, type: Array, desc: "Tags."
+        requires :answers, type: Hash, desc: "The anwsers."
+        requires :categories, type: Array, desc: "Categories."
       end
       post do
-        quote = Quote.new({
+        Quote.create({
                               text: params[:text],
-                              answer: params[:answer],
+                              answers: params[:answers],
+                              categories: params[:categories],
                           })
-        quote.push(tags: params[:tags])
-
-        quote.insert()
       end
 
       desc "Update a Quote."
       params do
         requires :id, type: String, desc: "Quote ID."
         requires :text, type: String, desc: "Your quote."
-        requires :answer, type: String, desc: "The anwser."
-        requires :tags, type: Array, desc: "Tags."
+        requires :answers, type: Hash, desc: "The anwsers."
+        requires :categories, type: Array, desc: "Categories."
       end
       put ':id' do
         Quote.find(params[:id]).update({
                                            text: params[:text],
-                                           answer: params[:answer],
-                                           tags: params[:tags]
+                                           answers: params[:answers],
+                                           categories: params[:categories],
                                        })
       end
 

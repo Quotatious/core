@@ -2,6 +2,6 @@ class Quote
   include Mongoid::Document
 
   field :text, type: String
-  field :answer, type: String
-  field :tags, type: Array
+  field :answers, type: Hash
+  field :categories, type: Array
 end
