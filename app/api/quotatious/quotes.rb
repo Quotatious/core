@@ -1,5 +1,5 @@
 module Quotatious
-  class API < Grape::API
+  class Quotes < Grape::API
     version 'v1', using: :header, vendor: 'quotatious'
     format :json
 
