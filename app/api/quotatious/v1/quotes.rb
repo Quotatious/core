@@ -4,6 +4,11 @@ module Quotatious
       version 'v1', using: :header, vendor: 'quotatious'
       format :json
 
+      http_basic do |email, password|
+        user = User::where({email: email}).first
+        user && BCrypt::Password.new(user.password) == password
+      end
+
       resource :quotes do
         desc "Return Quotes."
         get :random do
