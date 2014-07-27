@@ -10,11 +10,6 @@ module Quotatious
       end
 
       resource :quotes do
-        desc "Return Quotes."
-        get :random do
-          Quote.limit(20)
-        end
-
         desc "Return a quote."
         params do
           requires :id, type: String, desc: "Quote id."

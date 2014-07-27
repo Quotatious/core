@@ -1,6 +1,8 @@
 class User
   include Mongoid::Document
 
+  has_many :games
+
   field :email, type: String
   field :username, type: String
   field :password, type: String

@@ -21,7 +21,7 @@ module Quotatious
           User.create({
                           email: params[:email],
                           username: params[:username],
-                          password: BCrypt::Password.create(params[:password], :cost => 8),
+                          password: ::BCrypt::Password.create(params[:password], :cost => 8),
                       })
         end
       end
